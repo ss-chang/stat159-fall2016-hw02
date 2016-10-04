@@ -1,0 +1,7 @@
+       TV             Sales      
+ Min.   :  0.70   Min.   : 1.60  
+ 1st Qu.: 74.38   1st Qu.:10.38  
+ Median :149.75   Median :12.90  
+ Mean   :147.04   Mean   :14.02  
+ 3rd Qu.:218.82   3rd Qu.:17.40  
+ Max.   :296.40   Max.   :27.00  
