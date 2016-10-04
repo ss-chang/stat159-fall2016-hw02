@@ -35,11 +35,11 @@ dev.off()
 # Sales
 hist(advertising$Sales, 
      xlab = "Product Sales (thousands of units)", 
-     ylim = c(0,50), 
+     ylim = c(0,80), 
      main = "Histogram of Product Sales")
 # Save as PNG
-dev.copy(png, "images/histogram-tv.png")
+dev.copy(png, "images/histogram-sales.png")
 dev.off()
 # Save as PDF
-dev.copy(pdf, "images/histogram-tv.pdf")
+dev.copy(pdf, "images/histogram-sales.pdf")
 dev.off()
