@@ -24,8 +24,7 @@ sink()
 # TV
 hist(advertising$TV, 
      xlab = "$ (in thousands)", 
-     ylim = c(0,50), 
-     main = "Histogram of Television Advertising Budgets")
+     ylim = c(0,50))
 # Save as PNG
 dev.copy(png, "images/histogram-tv.png")
 dev.off()
@@ -36,8 +35,7 @@ dev.off()
 # Sales
 hist(advertising$Sales, 
      xlab = "Product Sales (thousands of units)", 
-     ylim = c(0,80), 
-     main = "Histogram of Product Sales")
+     ylim = c(0,80))
 # Save as PNG
 dev.copy(png, "images/histogram-sales.png")
 dev.off()
