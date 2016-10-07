@@ -7,3 +7,19 @@ output: pdf_document
 ---
 
 ## Abstract
+In this report, I will reproduce the scatterplot and fitted regression line 
+shown in Figure 3.1 (page 62) of _An Introduction to Statistical Learning_ by 
+Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. In addition, 
+I will also reproduce the summary regression coefficients shown in Table 3.1 (page 
+68) and the quality indices shows in Table 3.2 (page 69). These results are based 
+on the `Advertising.csv` dataset that is paired with the textbook, and contains 
+data on product sales in over two hundred different markets along with the 
+advertising budgets for the product in each market by different media: `TV`, 
+`radio`, and `newspaper`.  
+
+## Introduction
+
+## Data
+## Methodology
+## Results
+## Conclusions
