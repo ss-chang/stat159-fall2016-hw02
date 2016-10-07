@@ -1,0 +1,9 @@
+---
+title: Regression Analysis on the Relationship Between TV Advertising Budgets and
+  Product Sales
+author: "Shannon Chang"
+date: "October 6, 2016"
+output: pdf_document
+---
+
+## Abstract
