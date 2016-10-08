@@ -6,7 +6,12 @@ date: "October 6, 2016"
 output: pdf_document
 ---
 
-
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, results = 'hide', message = FALSE}
+library(png)
+library(grid)
+library(xtable)
+load("../data/regression.RData")
+```
 
 ## Abstract
 In this report, I will reproduce the scatterplot and fitted regression line 
@@ -21,8 +26,10 @@ dataset that is paired with the textbook, and contains data on product sales
 in over two hundred different markets along with the advertising budgets for 
 the product in each market by different mediums: `TV`, `Radio`, and `Newspaper`.
 
+
+
 ## Introduction
-Suppose a company wanted advice on how to increase sales for one of its products. 
+Suppose a company wants advice on how to increase sales for one of its products. 
 There is, of course, no concrete way to insure increased sales, but we can 
 influence greater sales through advertising. Imagine that we are statistical 
 consultants hired for this project. To convince the company to invest in 
@@ -37,23 +44,114 @@ advertising; therefore I will only construct analyses for TV advertising budgets
 and sales. This analyses can, however, be extended and compared to all remaining 
 mediums in the dataset (radio and newspaper).  
 
+
+
 ## Data
 The `Advertising.csv` dataset consists of advertising budgets (in thousands of 
 dollars) by medium: `TV`, `Radio`, and `Newspaper`. Product sales (in thousands
 of units) are listed under `Sales`. There are 200 rows of data, indicating 200 
 different markets. I will only be using data in the `TV` and `Sales` columns. 
 Histograms for the two columns are shown below: 
-<center>![Figure 1: Histogram of TV Advertising Budgets](../images/histogram-tv.png)</center>  
-<center>![Figure 2: Histogram of Product Sales](../images/histogram-sales.png)</center>  
 
-## Methodology
+```{r, eval = TRUE, echo = FALSE, fig.width = 4, fig.height = 4, fig.align='center', fig.cap= "Frequency of TV Advertising Budgets"}
+img <- readPNG("../images/histogram-tv.png")
+grid.raster(img)
+```
+
+```{r, eval = TRUE, echo = FALSE, fig.width = 4, fig.height = 4, fig.align='center', fig.cap= "Frequency of Product Sales"}
+img <- readPNG("../images/histogram-sales.png")
+grid.raster(img)
+```
+
+
+
+## Methodology 
+### Setting Up a Model
 To examine the association between `TV` and `Sales`, we model their relationship 
 by _simple linear regression_. This method involves predicting a quantitative 
 response $Y$ based on the predictor variable $X$, assuming that there is a linear 
 relationship between the two. For `TV` and `Sales`, we model their relationship as: 
-<center>$Sales = \beta_0 + \beta_1TV$</center>  
-Here, \beta_0 represents the intercept of the linear model while \beta_1 represents 
-the slope. 
+$$Sales = \beta_0 + \beta_1TV$$
+Here, $\beta_0$ represents the intercept of the linear model while $\beta_1$ 
+represents the slope. 
+  
+Since $\beta_0$ and $\beta_1$ are unknown, we would need to calculate estimates for 
+the two coefficients instead. In a visual manner of speaking, we would want to 
+graph all the data for `TV` and `Sales` and fit a line $Sales = \beta_0 + \beta_1TV$ 
+as close as possible to our 200 data points. We can optimize the fit of this line 
+using the _least squares criterion_. This involves minimizing the sum of squared 
+errors (distance between each data point and its predicted value from the linear 
+model). The line/linear model that we fit would be based on an average of the 
+squares. 
+  
+From a computational perspective, we can start fitting the line by using sample 
+means as estimates for $\beta_0$ and $\beta_1$, since the average of sample means 
+over a large number of datasets will be very close to the actual/population mean. 
+To evaluate the accuracy of these estimates, we start by calculating standard errors 
+of the standard means. We can then use these standard errors to perform 
+_hypothesis tests_ on the estimates. Thus, we would be testing the _null hypothesis_ 
+that $$H_0: There\: is\: no\: relationship\: between\: TV\:  and\:  Sales$$ versus the 
+_alternative hypothesis_ that 
+$$H_0: There\: is\: some\: relationship\: between\: TV\: and\: Sales$$ 
+Numerically, we would be testing $$H_0: \beta_1 = 0$$ versus 
+$$H_0: \beta_1 \neq 0$$  
+To do so, we would calculate a _t-statistic_:
+$$t = \frac{estimate - 0}{SE(estimate)}$$  
+This measures the number of standard deviations that our estimate for $\beta_1$ is 
+away from 0.  
+From this, we can calculate a _p-value_, which is the probability of observing 
+any value greater than or equal to |_t_|. A small p-value would indicate that it 
+is unlikely to observe a meaningful association between the predictor (`TV`) and 
+the response (`Sales`) purely by chance without some true relationship between 
+the two. Thus, a small p-value would allow us to _reject the null hypothesis_ and 
+determine that there is a relationship between `TV` and `Sales`. In general, 5% 
+or 1% are used as p-value benchmarks. 
 
-## Results
-## Conclusions
+### Evaluating Accuracy of the Model
+After conducting the hypothesis test, we will want to examine the extent to which 
+the model fits the data. There are two quantities we can look at to assess this: 
+_residual standard error_ and the $R^2$ statistic
+
+#### Residual standard error (RSE)
+The RSE is an estimate of the standard deviation of errors, the distances from 
+each data point to its predicted value based on the linear model we fit. In other 
+words, it is the average amount that the response (`Sales`) will differ from 
+the true regression line. 
+
+#### $R^2$ statistic
+The $R^2$ statistic is, technically speaking, the proportion of variance explained 
+by our fitted model. Specifically, it measures the _proportion of variability in the response (`Sales`) that can be explained using the predictor (`TV`)_. 
+The closer $R^2$ is to 1, the greater the proportion of variability that is 
+explained. 
+
+
+
+## Results 
+Using data collected in `Advertising.csv` for TV advertising budgets and their 
+corresponding product sales, I was able to generate the following calculations 
+for the regression coefficients: 
+```{r, eval - TRUE, echo = FALSE}
+print(reg_table, type = "html")
+```
+
+A visualization of the coefficient estimates in relation to the observed data 
+can be seen in this scatterplot: 
+```{r, eval = TRUE, echo = FALSE, fig.width = 6, fig.height = 4, fig.align='center', fig.cap= "Predicting Product Sales Based on TV Advertising Budgets"}
+img <- readPNG("../images/scatterplot-tv-sales.png")
+grid.raster(img)
+```
+
+Calculations for the quality indices yield the following: 
+```{r, eval - TRUE, echo = FALSE}
+print(regsum_table, type = "html")
+```
+Note that the F-statistic is included here as well. This is usually utilized for 
+multiple linear regression and thus, will not be discussed in this report. 
+
+
+## Conclusions 
+Since the p-value for the estimate of `TV` is essentially 0, we can reject the 
+null hypothesis and infer that there is indeed a relationship between `TV` and 
+`Sales`. From the quality indices, we can see that on average, the observed data 
+deviates from its predicted value by 3.26, meaning $3,260. The $R^2$ value tells 
+us that 61% of the variability in `Sales` can be explained by `TV`.
