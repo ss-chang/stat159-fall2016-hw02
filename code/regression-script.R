@@ -17,14 +17,21 @@ reg
 regsum <- summary(reg)
 regsum
 
-# Output file
-save(reg, regsum, file = 'data/regression.RData')
+# Create tables
+library(xtable)
+reg_table <- xtable(reg, 
+                    caption = "Table 1: Summary of Regression Coefficients")
+regsum_table <- xtable(regsum, 
+                       caption = "Table 2: Quality Indices")
 
+# Output file
+save(reg, regsum, reg_table, regsum_table, file = 'data/regression.RData')
 
 
 # ==============================================================================
 # Scatterplot
 # ==============================================================================
+libray(ggplot2)
 ggplot(data = advertising, aes(x = TV, y = Sales)) + 
   geom_point(color = "tomato") + 
   xlab("TV Advertising Budget (in thousands of dollars)") +
