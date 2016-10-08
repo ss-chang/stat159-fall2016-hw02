@@ -22,25 +22,35 @@ sink()
 # Histograms
 # ==============================================================================
 # TV
-hist(advertising$TV, 
-     xlab = "$ (in thousands)", 
-     main = "TV Advertising Budgets",
-     ylim = c(0,50))
 # Save as PNG
-dev.copy(png, "images/histogram-tv.png")
+png("images/histogram-tv.png")
+tv_hist <- hist(advertising$TV, 
+                xlab = "$ (in thousands)", 
+                main = "TV Advertising Budgets",
+                ylim = c(0,50))
 dev.off()
+
 # Save as PDF
-dev.copy(pdf, "images/histogram-tv.pdf")
+pdf("images/histogram-tv.pdf")
+tv_hist <- hist(advertising$TV, 
+                xlab = "$ (in thousands)", 
+                main = "TV Advertising Budgets",
+                ylim = c(0,50))
 dev.off()
 
 # Sales
+# Save as PNG
+png("images/histogram-sales.png")
 hist(advertising$Sales, 
      xlab = "Units of Product Sold (in thousands)",
      main = "Sales",
      ylim = c(0,80))
-# Save as PNG
-dev.copy(png, "images/histogram-sales.png")
 dev.off()
+
 # Save as PDF
-dev.copy(pdf, "images/histogram-sales.pdf")
+pdf("images/histogram-sales.pdf")
+hist(advertising$Sales, 
+     xlab = "Units of Product Sold (in thousands)",
+     main = "Sales",
+     ylim = c(0,80))
 dev.off()
