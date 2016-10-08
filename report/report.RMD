@@ -8,14 +8,16 @@ output: pdf_document
 
 ## Abstract
 In this report, I will reproduce the scatterplot and fitted regression line 
-shown in Figure 3.1 (page 62) of _An Introduction to Statistical Learning_ by 
-Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. In addition, 
-I will also reproduce the summary regression coefficients shown in Table 3.1 (page 
-68) and the quality indices shows in Table 3.2 (page 69). These results are based 
-on the `Advertising.csv` dataset that is paired with the textbook, and contains 
-data on product sales in over two hundred different markets along with the 
-advertising budgets for the product in each market by different media: `TV`, 
-`radio`, and `newspaper`.  
+shown in **Figure 3.1** (page 62) of 
+[_An Introduction to Statistical Learning_](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf)
+by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. In 
+addition, I will also reproduce the summary regression coefficients shown in 
+**Table 3.1** (page 68) and the quality indices shows in **Table 3.2** (page 69). 
+These results are based on the 
+[`Advertising.csv`](http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv) 
+dataset that is paired with the textbook, and contains data on product sales 
+in over two hundred different markets along with the advertising budgets for 
+the product in each market by different mediums: `TV`, `Radio`, and `Newspaper`.
 
 ## Introduction
 Suppose a company wanted advice on how to increase sales for one of its products. 
@@ -31,9 +33,14 @@ be utilized to predict sales based on the size of advertising budget. For the
 purposes of this paper, we suppose that the company is only surveying TV 
 advertising; therefore I will only construct analyses for TV advertising budgets 
 and sales. This analyses can, however, be extended and compared to all remaining 
-mediums in the dataset (radio and newspaper).
+mediums in the dataset (radio and newspaper).  
 
 ## Data
+The `Advertising.csv` dataset consists of advertising budgets (in thousands of 
+dollars) by medium: `TV`, `Radio`, and `Newspaper`. Product sales (in thousands
+of units) are listed under `Sales`. There are 200 rows of data, indicating 200 
+different markets. 
+
 ## Methodology
 ## Results
 ## Conclusions
