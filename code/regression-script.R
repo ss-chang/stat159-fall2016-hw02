@@ -17,21 +17,29 @@ reg
 regsum <- summary(reg)
 regsum
 
-# Create tables
+# Tables
 library(xtable)
 reg_table <- xtable(reg, 
                     caption = "Table 1: Summary of Regression Coefficients")
-regsum_table <- xtable(regsum, 
+
+q_ind <-data.frame("Residual standard error" = c(round(regsum$sigma, digits = 2)), 
+           "R^2" = c(round(regsum$r.squared, digits = 2)), 
+           "F-statistic" = c(round(regsum$fstatistic, digits = 2)))
+q_ind <- data.frame(t(q_ind))
+q_ind <- q_ind[1]
+colnames(q_ind) <- c("Value")
+regsum_table <- xtable(q_ind, 
                        caption = "Table 2: Quality Indices")
 
 # Output file
 save(reg, regsum, reg_table, regsum_table, file = 'data/regression.RData')
 
 
+
 # ==============================================================================
 # Scatterplot
 # ==============================================================================
-libray(ggplot2)
+library(ggplot2)
 ggplot(data = advertising, aes(x = TV, y = Sales)) + 
   geom_point(color = "tomato") + 
   xlab("TV Advertising Budget (in thousands of dollars)") +
