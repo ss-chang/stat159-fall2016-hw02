@@ -18,6 +18,20 @@ advertising budgets for the product in each market by different media: `TV`,
 `radio`, and `newspaper`.  
 
 ## Introduction
+Suppose a company wanted advice on how to increase sales for one of its products. 
+There is, of course, no concrete way to insure increased sales, but we can 
+influence greater sales through advertising. Imagine that we are statistical 
+consultants hired for this project. To convince the company to invest in 
+advertising campaigns, we must first prove to the company that there is a 
+relationship between advertising and sales. From here, we can then advise the 
+company on appropriate advertising budgets to better reach sales targets. Thus, 
+the goal for this analysis is to determine whether there is a relationship 
+between advertising and sales and, if so, construct an accurate model that can 
+be utilized to predict sales based on the size of advertising budget. For the 
+purposes of this paper, we suppose that the company is only surveying TV 
+advertising; therefore I will only construct analyses for TV advertising budgets 
+and sales. This analyses can, however, be extended and compared to all remaining 
+mediums in the dataset (radio and newspaper).
 
 ## Data
 ## Methodology
