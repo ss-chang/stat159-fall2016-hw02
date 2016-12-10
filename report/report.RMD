@@ -10,6 +10,7 @@ output: pdf_document
 library(png)
 library(grid)
 library(xtable)
+library(gridExtra)
 load("../data/regression.RData")
 ```
 
@@ -130,9 +131,13 @@ explained.
 Using data collected in `Advertising.csv` for TV advertising budgets and their 
 corresponding product sales, I was able to generate the following calculations 
 for the regression coefficients: 
-```{r, eval - TRUE, echo = FALSE}
-print(reg_table, type = "html")
+```{r, eval = TRUE, echo = FALSE, results = "asis", message = FALSE}
+reg_table <- xtable(regsum$coefficients, 
+                    digits = c(0, 4, 4, 2, 4), 
+                    caption = c("Coefficient Estimates from the Simple Regression of Sales on TV"))
+print.xtable(reg_table, comment = FALSE, caption.placement = "top")
 ```
+
 
 A visualization of the coefficient estimates in relation to the observed data 
 can be seen in this scatterplot: 
@@ -142,16 +147,23 @@ grid.raster(img)
 ```
 
 Calculations for the quality indices yield the following: 
-```{r, eval - TRUE, echo = FALSE}
-print(regsum_table, type = "html")
+```{r, eval = TRUE, echo = FALSE, results = "asis", message = FALSE}
+q_ind <- data.frame("Quantity" = c("Residual standard error", "R^2", "F-statistic"), 
+                    "Value" = c(round(regsum$sigma, 2), round(regsum$r.squared, 3), round(regsum$fstatistic[1], 1)))
+q_tab <- xtable(q_ind, 
+                caption = c("Quality Indices for the Multiple Linear Regression of Sales on TV, Radio, and Newspaper"))
+print.xtable(q_tab, comment = FALSE, caption.placement = "top")
 ```
+
 Note that the F-statistic is included here as well. This is usually utilized for 
 multiple linear regression and thus, will not be discussed in this report. 
 
 
 ## Conclusions 
-Since the p-value for the estimate of `TV` is essentially 0, we can reject the 
+Since the p-value for the estimated coefficient of `TV` is 
+`r round(regsum$coefficients[8], digits = 4)` (essentially 0), we can reject the 
 null hypothesis and infer that there is indeed a relationship between `TV` and 
 `Sales`. From the quality indices, we can see that on average, the observed data 
-deviates from its predicted value by 3.26, meaning $3,260. The $R^2$ value tells 
-us that 61% of the variability in `Sales` can be explained by `TV`.
+deviates from its predicted value by `r round(regsum$sigma, digits = 2)`, 
+meaning $`r 1000*round(regsum$sigma[1], digits = 2)`. The $R^2$ value tells 
+us that `r 100*round(regsum$r.squared, digits = 3)`% of the variability in `Sales` can be explained by `TV`.
